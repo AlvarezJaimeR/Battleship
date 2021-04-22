@@ -7,6 +7,8 @@ class Player {
     constructor(name){
         this.score = 0;
         this.name = name;
+        this.playerBoard;
+        this.enemyBoard;
     }
 
     userName(){
@@ -21,24 +23,31 @@ class Player {
         }return userName;
     }
 
-        //Check if the user input is all characters
-        userValidation(userOppChoice, validationMessage){
-            var letterCheck = /^[A-Za-z]+$/;
-            if (userOppChoice==null || userOppChoice=="")
-            {
-                console.log(validationMessage);
-                return false;
-            }
-            else if (!userOppChoice.match(letterCheck))
-            {
-                console.log("Choice must contain letters only!");
-                console.log(validationMessage);
-                return false;
-            }
-            else {
-                return true;
-            }
+    //Check if the user input is all characters
+    userValidation(userOppChoice, validationMessage){
+        var letterCheck = /^[A-Za-z]+$/;
+        if (userOppChoice==null || userOppChoice=="")
+        {
+            console.log(validationMessage);
+            return false;
         }
+        else if (!userOppChoice.match(letterCheck))
+        {
+            console.log("Choice must contain letters only!");
+            console.log(validationMessage);
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    userInitialTurn(){
+        this.playerBoard = new Gameboard();
+        let playerOneInitialGrid = this.playerBoard.startGrid();
+        return playerOneInitialGrid;
+    }
+
 }
 
 module.exports = Player;

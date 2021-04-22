@@ -13,6 +13,13 @@ class Game{
         this.displayRules();
         this.playerOne = new Player();
         this.playerOne.name = this.playerOne.userName();
+        let playerOneEmptyGrid = this.playerOne.userInitialTurn();
+        //let test = this.playerOne.playerBoard.displayGrid(playerOneGrid);
+
+/*     let test = this.gameboardOne.startGrid();
+    this.displayGrid(test);
+    test[1][3] = "  X  ";
+    this.displayGrid(test); */
     }
 
     displayRules(){

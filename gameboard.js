@@ -32,8 +32,10 @@ class Gameboard {
 
         let alphabetArray = ['  A  ', '  B  ', '  C  ', '  D  ', '  E  ', '  F  ', '  G  ', '  H  ', '  I  ', '  J  ', '  K  ', '  L  ', '  M  ', '  N  ', '  O  ', '  P  ', '  Q  ', '  R  ', '  S  ', '  T  '];
         let gameGrid = createGrid(21, 21, alphabetArray);
+        this.displayGrid(gameGrid);
         return gameGrid;
     }
+
     pushNumbers(row){
         for (let i=0; i<21; i++){
             row.push('  ' + i + '  ');
@@ -45,11 +47,6 @@ class Gameboard {
             console.log(grid[i].join(""));
         }
     }
-
-/*     let test = this.gameboardOne.startGrid();
-    this.displayGrid(test);
-    test[1][3] = "  X  ";
-    this.displayGrid(test); */
 }
 
 module.exports = Gameboard;
