@@ -23,8 +23,8 @@ class Game{
         let playerOneRow = this.playerOne.setShipRow();
         console.log("You picked " + playerOneColumn.toUpperCase() + playerOneRow);
         playerOneColumn = playerOneColumn.charCodeAt(playerOneColumn);
-        console.log(playerOneColumn-96);
-        console.log(playerOneRow+1);
+        console.log(playerOneColumn);
+        console.log(playerOneRow);
         playerOneGrid[playerOneColumn-96][playerOneRow] = "  X  ";
         this.playerOne.playerBoard.displayGrid(playerOneGrid);
     }
