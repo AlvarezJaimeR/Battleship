@@ -1,14 +1,16 @@
 "use strict"
 
 const Gameboard = require('./gameboard');
+const {Destroyer, Submarine, Battleship, AircraftCarrier} = require('./ship');
 const prompt = require('prompt-sync')();
 
 class Player {
     constructor(name){
         this.score = 0;
         this.name = name;
-        this.playerBoard;
-        this.enemyBoard;
+        this.playerBoard = new Gameboard();
+        this.enemyBoard = new Gameboard();
+        this.playerShips = [new Destroyer(), new Submarine(), new Battleship(), new AircraftCarrier()]; 
     }
 
     userName(){
@@ -43,7 +45,6 @@ class Player {
     }
 
     userInitialTurn(){
-        this.playerBoard = new Gameboard();
         let playerOneInitialGrid = this.playerBoard.startGrid();
         return playerOneInitialGrid;
     }

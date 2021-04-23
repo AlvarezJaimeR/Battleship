@@ -13,13 +13,11 @@ class Game{
         this.displayRules();
         this.playerOne = new Player();
         this.playerOne.name = this.playerOne.userName();
-        let playerOneEmptyGrid = this.playerOne.userInitialTurn();
-        //let test = this.playerOne.playerBoard.displayGrid(playerOneGrid);
+        let playerOneGrid = this.playerOne.userInitialTurn();
 
-/*     let test = this.gameboardOne.startGrid();
-    this.displayGrid(test);
-    test[1][3] = "  X  ";
-    this.displayGrid(test); */
+        //able to pick a coordinate and change the value
+/*         playerOneGrid[10][6] = "  X  ";
+        this.playerOne.playerBoard.displayGrid(playerOneGrid); */
     }
 
     displayRules(){

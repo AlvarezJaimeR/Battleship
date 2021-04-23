@@ -2,7 +2,7 @@
 
 class Gameboard {
     constructor(name){
-        this.name = name;
+        this.name = name
     }
 
     startGrid(){
