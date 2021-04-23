@@ -49,6 +49,17 @@ class Player {
         return playerOneInitialGrid;
     }
 
+    setShipColumn(){
+        console.log("What column would you like to choose:");
+        let userInputColumn = prompt().toLowerCase();
+        return userInputColumn;
+    }
+
+    setShipRow(){
+        console.log("What row would you like to choose:");
+        let userInputRow = parseInt(prompt());
+        return userInputRow;
+    }
 }
 
 module.exports = Player;
