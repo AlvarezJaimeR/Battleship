@@ -46,6 +46,7 @@ class Player {
 
     userValidationColumn(userChoice, validationMessage){
         var letterCheck = /^[A-Za-z]+$/;
+        console.log(userChoice.charCodeAt(userChoice.toLowerCase()));
         if (userChoice==null || userChoice=="")
         {
             console.log(validationMessage);
@@ -55,8 +56,13 @@ class Player {
             console.log("Choice must contain letters only!");
             console.log(validationMessage);
             return false;
-        }else if (userChoice.length == 1 && userChoice.charCodeAt(userChoice) > 97 && userChoice.charCodeAt(userChoice) < 117){
-            return true;
+        }else if (userChoice.length == 1){
+            if  (userChoice.charCodeAt(userChoice.toLowerCase()) > 96 && userChoice.charCodeAt(userChoice.toLowerCase()) < 117){
+                return true;
+            }else{
+                console.log(validationMessage);
+                return false;
+            }
         }else {
             console.log(validationMessage);
             return false;
