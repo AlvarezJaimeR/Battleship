@@ -44,9 +44,8 @@ class Player {
         }
     }
 
-    userValidationColumn(userChoice, validationMessage){
+    userValidationRow(userChoice, validationMessage){
         var letterCheck = /^[A-Za-z]+$/;
-        console.log(userChoice.charCodeAt(userChoice.toLowerCase()));
         if (userChoice==null || userChoice=="")
         {
             console.log(validationMessage);
@@ -69,7 +68,7 @@ class Player {
         }
     }
 
-    userValidationRow(userChoice){
+    userValidationColumn(userChoice){
         if (userChoice == null) {
             console.log("Please input a number.");
             return false;
@@ -89,13 +88,13 @@ class Player {
         return playerOneInitialGrid;
     }
 
-    setShipColumn(){
-        console.log("What column would you like to choose:");
+    setShipRow(){
+        console.log("What row would you like to choose:");
         let userInputColumn = prompt().toLowerCase();
         console.log(userInputColumn.charCodeAt(userInputColumn));
         let test = false;
         while(test === false){
-            test = this.userValidationColumn(userInputColumn, 'Please input a letter from A-T');
+            test = this.userValidationRow(userInputColumn, 'Please input a letter from A-T');
             if (test === false){
                 userInputColumn = prompt();
             }
@@ -103,17 +102,29 @@ class Player {
         return userInputColumn;
     }
 
-    setShipRow(){
-        console.log("What row would you like to choose:");
+    setShipColumn(){
+        console.log("What column would you like to choose:");
         let userInputRow = parseInt(prompt());
         let test = false;
         while(test === false){
-            test = this.userValidationRow(userInputRow);
+            test = this.userValidationColumn(userInputRow);
             if (test === false){
                 userInputRow = prompt();
             }
         }
         return userInputRow;
+    }
+
+    runSetup(){
+        this.name = this.userName();
+        console.log(this.name + " -- Please decide where to place your destroyer, size 2, (ex. column G row 10).");
+        let playerGrid = this.userInitialTurn();
+        let playerRow = this.setShipRow();
+        let playerColumn = this.setShipColumn();
+        console.log("You picked " + playerRow.toUpperCase() + playerColumn);
+        playerRow = playerRow.charCodeAt(playerRow);
+        playerGrid[playerRow-96][playerColumn] = "  X  ";
+        this.playerBoard.displayGrid(playerGrid);
     }
 }
 

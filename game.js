@@ -11,22 +11,7 @@ class Game{
 
     runGame(){
         this.displayRules();
-        this.initialSetupPlayerOne();
-    }
-
-    initialSetupPlayerOne(){
-        //first setup
-        this.playerOne.name = this.playerOne.userName();
-        console.log(this.playerOne.name + " -- Please decide where to place your destroyer, size 2, (ex. column G row 10).");
-        let playerOneGrid = this.playerOne.userInitialTurn();
-        let playerOneColumn = this.playerOne.setShipColumn();
-        let playerOneRow = this.playerOne.setShipRow();
-        console.log("You picked " + playerOneColumn.toUpperCase() + playerOneRow);
-        playerOneColumn = playerOneColumn.charCodeAt(playerOneColumn);
-        console.log(playerOneColumn);
-        console.log(playerOneRow);
-        playerOneGrid[playerOneColumn-96][playerOneRow] = "  X  ";
-        this.playerOne.playerBoard.displayGrid(playerOneGrid);
+        this.playerOne.runSetup();
     }
 
     displayRules(){
