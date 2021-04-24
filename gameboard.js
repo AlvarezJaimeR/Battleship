@@ -1,5 +1,7 @@
 "use strict"
 
+const ship = require("./ship");
+
 class Gameboard {
     constructor(name){
         this.name = name
@@ -45,6 +47,39 @@ class Gameboard {
     displayGrid = (grid) => {
         for (let i = 0; i < grid.length; i++) {
             console.log(grid[i].join(""));
+        }
+    }
+
+    checkRightBoundary(pickedColumn, shipSize){
+        if (20 - pickedColumn + shipSize >= 0){
+            return true;
+        }else{
+            console.log("Too close to the right boundary. The ship can't face this way.");
+            return false;
+        }
+    }
+
+    checkLeftBoundary(pickedColumn, shipSize){
+        if (pickedColumn - shipSize >= 0){
+            return true;
+        }else{
+            console.log("Too close to the left boundary. The ship can't face this way.");
+            return false;
+        }
+    }
+
+    checkTopBoundary(pickedRow, shipSize){
+        if (pickedRow - shipSize >= 0){
+            return true;
+        }else{
+            console.log("Too close to the top boundary. The ship can't face this way.");
+            return false;
+        }
+    }
+
+    checkBottomBoundary(pickedRow, shipSize){
+        if (20 - pickedRow + shipSize >= 0){
+            return false;
         }
     }
 }

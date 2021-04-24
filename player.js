@@ -91,7 +91,6 @@ class Player {
     setShipRow(){
         console.log("What row would you like to choose:");
         let userInputColumn = prompt().toLowerCase();
-        console.log(userInputColumn.charCodeAt(userInputColumn));
         let test = false;
         while(test === false){
             test = this.userValidationRow(userInputColumn, 'Please input a letter from A-T');
@@ -117,14 +116,33 @@ class Player {
 
     runSetup(){
         this.name = this.userName();
-        console.log(this.name + " -- Please decide where to place your destroyer, size 2, (ex. column G row 10).");
         let playerGrid = this.userInitialTurn();
-        let playerRow = this.setShipRow();
-        let playerColumn = this.setShipColumn();
-        console.log("You picked " + playerRow.toUpperCase() + playerColumn);
+        for (let i=0; i < 4; i++){
+            console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
+            let playerRow = this.setShipRow();
+            let playerColumn = this.setShipColumn();
+            console.log("You picked " + playerRow.toUpperCase() + playerColumn);
+            
+            playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
+            this.playerBoard.displayGrid(playerGrid);
+        }
+    }
+
+    setShip(playerRow, playerColumn, playerGrid){
         playerRow = playerRow.charCodeAt(playerRow);
-        playerGrid[playerRow-96][playerColumn] = "  X  ";
-        this.playerBoard.displayGrid(playerGrid);
+        if (playerColumn > 1 && playerColumn <= 10){
+            playerGrid[playerRow-96][playerColumn] = "  X  ";
+        }else {
+            playerGrid[playerRow-96][playerColumn] = "   X  ";
+        }
+        return playerGrid;
+    }
+
+    shipBoundaries(){
+        let rightBound = this.playerBoard.checkRightBoundary(playerColumn, this.playerShips[0].size);
+        let leftBound = this.playerBoard.checkLeftBoundary(playerColumn, this.playerShips[0].size);
+        let topBound = this.playerBoard.checkTopBoundary(playerRow, this.playerShips[0].size);
+        let bottomBound = this.playerBoard.checkBottomBoundary(playerRow, this.playerShips[0].size);
     }
 }
 
