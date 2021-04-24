@@ -5,6 +5,8 @@ const ship = require("./ship");
 class Gameboard {
     constructor(name){
         this.name = name
+        this.width = 21;
+        this.length = 21;
     }
 
     startGrid(){
@@ -33,7 +35,7 @@ class Gameboard {
     }
 
         let alphabetArray = ['  A  ', '  B  ', '  C  ', '  D  ', '  E  ', '  F  ', '  G  ', '  H  ', '  I  ', '  J  ', '  K  ', '  L  ', '  M  ', '  N  ', '  O  ', '  P  ', '  Q  ', '  R  ', '  S  ', '  T  '];
-        let gameGrid = createGrid(21, 21, alphabetArray);
+        let gameGrid = createGrid(this.width, this.length, alphabetArray);
         this.displayGrid(gameGrid);
         return gameGrid;
     }
@@ -51,20 +53,24 @@ class Gameboard {
     }
 
     checkRightBoundary(pickedColumn, shipSize){
-        if (20 - pickedColumn + shipSize >= 0){
-            return true;
-        }else{
+        console.log("right bound " + pickedColumn + " " + shipSize);
+        if (this.width - 1 - pickedColumn - shipSize <= 0){
             console.log("Too close to the right boundary. The ship can't face this way.");
             return false;
+        }else{
+            console.log("Right Boundary pass");
+            return true;
         }
     }
 
     checkLeftBoundary(pickedColumn, shipSize){
-        if (pickedColumn - shipSize >= 0){
-            return true;
-        }else{
+        console.log("left bound " + pickedColumn + " " + shipSize);
+        if (pickedColumn - shipSize <= 0){
             console.log("Too close to the left boundary. The ship can't face this way.");
             return false;
+        }else{
+            console.log("Left Boundary Pass");
+            return true;
         }
     }
 
@@ -78,7 +84,10 @@ class Gameboard {
     }
 
     checkBottomBoundary(pickedRow, shipSize){
-        if (20 - pickedRow + shipSize >= 0){
+        if (this.length - 1 - pickedRow + shipSize >= 0){
+            return true;
+        }else{
+            console.log("Too close to the bottom boundary. The ship can't face this way.");
             return false;
         }
     }

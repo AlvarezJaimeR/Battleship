@@ -90,23 +90,10 @@ class Player {
 
     setShipRow(){
         console.log("What row would you like to choose:");
-        let userInputColumn = prompt().toLowerCase();
+        let userInputRow = prompt().toLowerCase();
         let test = false;
         while(test === false){
-            test = this.userValidationRow(userInputColumn, 'Please input a letter from A-T');
-            if (test === false){
-                userInputColumn = prompt();
-            }
-        }
-        return userInputColumn;
-    }
-
-    setShipColumn(){
-        console.log("What column would you like to choose:");
-        let userInputRow = parseInt(prompt());
-        let test = false;
-        while(test === false){
-            test = this.userValidationColumn(userInputRow);
+            test = this.userValidationRow(userInputRow, 'Please input a letter from A-T');
             if (test === false){
                 userInputRow = prompt();
             }
@@ -114,6 +101,20 @@ class Player {
         return userInputRow;
     }
 
+    setShipColumn(){
+        console.log("What column would you like to choose:");
+        let userInputColumn = parseInt(prompt());
+        let test = false;
+        while(test === false){
+            test = this.userValidationColumn(userInputColumn);
+            if (test === false){
+                userInputColumn = prompt();
+            }
+        }
+        return userInputColumn;
+    }
+
+    //main function that runs the initial set up
     runSetup(){
         this.name = this.userName();
         let playerGrid = this.userInitialTurn();
@@ -122,27 +123,65 @@ class Player {
             let playerRow = this.setShipRow();
             let playerColumn = this.setShipColumn();
             console.log("You picked " + playerRow.toUpperCase() + playerColumn);
-            
+            console.log("player row pre update " + playerRow);
+            playerRow = playerRow.charCodeAt(playerRow)-96;
+            console.log("player column " + playerColumn);
+            console.log("player row updated " + playerRow);
+            let playerColumnCheck = this.shipBoundaryWidth(playerColumn, i);
+            console.log("number check width: " + playerColumnCheck);
+            //this.shipBoundaryLength(playerRow, i);
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
         }
     }
 
     setShip(playerRow, playerColumn, playerGrid){
-        playerRow = playerRow.charCodeAt(playerRow);
         if (playerColumn > 1 && playerColumn <= 10){
-            playerGrid[playerRow-96][playerColumn] = "  X  ";
+            playerGrid[playerRow][playerColumn] = "  X  ";
         }else {
-            playerGrid[playerRow-96][playerColumn] = "   X  ";
+            playerGrid[playerRow][playerColumn] = "   X  ";
         }
         return playerGrid;
     }
 
-    shipBoundaries(){
-        let rightBound = this.playerBoard.checkRightBoundary(playerColumn, this.playerShips[0].size);
-        let leftBound = this.playerBoard.checkLeftBoundary(playerColumn, this.playerShips[0].size);
-        let topBound = this.playerBoard.checkTopBoundary(playerRow, this.playerShips[0].size);
-        let bottomBound = this.playerBoard.checkBottomBoundary(playerRow, this.playerShips[0].size);
+    shipBoundaryWidth(playerColumn, i){
+        console.log("player column (width)" + playerColumn);
+        let rightBound = this.playerBoard.checkRightBoundary(playerColumn, this.playerShips[i].size);
+        let leftBound = this.playerBoard.checkLeftBoundary(playerColumn, this.playerShips[i].size);
+        console.log("right Bound: ", rightBound);
+        console.log("left bound: ", leftBound);
+        if(rightBound === true && leftBound === true){
+            console.log("No bounds on width.");
+            return 0;
+        }else if(rightBound === true && leftBound === false) {
+            console.log("Not able to place the ship orientation to the left.");
+            return -1;
+        }else if(rightBound === false && leftBound === true){
+            console.log("Not able to place the ship orientation to the right.");
+            return 1;
+        }else {
+            console.log("Shouldn't hit this spot.");
+        }
+    }
+
+    shipBoundaryLength(playerRow, i){
+        console.log("player row (width)" + playerRow);
+        let topBound = this.playerBoard.checkTopBoundary(playerRow, this.playerShips[i].size);
+        let bottomBound = this.playerBoard.checkBottomBoundary(playerRow, this.playerShips[i].size);
+        console.log("top bound: ", topBound);
+        console.log("bottom bound: ", bottomBound);
+        if(topBound === true && bottomBound === true){
+            console.log("No bounds on width.");
+            return 0;
+        }else if(topBound === true && bottomBound === false) {
+            console.log("Not able to place the ship orientation down.");
+            return -1;
+        }else if(topBound === false && bottomBound === true){
+            console.log("Not able to place the ship orientation up.");
+            return 1;
+        }else {
+            console.log("Shouldn't hit this spot.");
+        }
     }
 }
 
