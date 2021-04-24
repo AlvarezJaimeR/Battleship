@@ -1,5 +1,4 @@
 "use strict"
-
 const ship = require("./ship");
 
 class Gameboard {
@@ -54,7 +53,7 @@ class Gameboard {
 
     checkRightBoundary(pickedColumn, shipSize){
         console.log("right bound " + pickedColumn + " " + shipSize);
-        if (this.width - 1 - pickedColumn - shipSize <= 0){
+        if (this.width - 1 - pickedColumn - shipSize + 1 < 0){
             console.log("Too close to the right boundary. The ship can't face this way.");
             return false;
         }else{
@@ -65,7 +64,7 @@ class Gameboard {
 
     checkLeftBoundary(pickedColumn, shipSize){
         console.log("left bound " + pickedColumn + " " + shipSize);
-        if (pickedColumn - shipSize <= 0){
+        if (pickedColumn - shipSize + 1 <= 0){
             console.log("Too close to the left boundary. The ship can't face this way.");
             return false;
         }else{
@@ -75,7 +74,8 @@ class Gameboard {
     }
 
     checkTopBoundary(pickedRow, shipSize){
-        if (pickedRow - shipSize >= 0){
+        console.log("top bound " + pickedRow + " " + shipSize);
+        if (pickedRow - shipSize + 1 >= 0){
             return true;
         }else{
             console.log("Too close to the top boundary. The ship can't face this way.");
@@ -84,7 +84,8 @@ class Gameboard {
     }
 
     checkBottomBoundary(pickedRow, shipSize){
-        if (this.length - 1 - pickedRow + shipSize >= 0){
+        console.log("top bound " + pickedRow + " " + shipSize);
+        if (this.length - 1 - pickedRow - shipSize + 1 >= 0){
             return true;
         }else{
             console.log("Too close to the bottom boundary. The ship can't face this way.");

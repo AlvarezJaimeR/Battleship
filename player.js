@@ -118,6 +118,10 @@ class Player {
     runSetup(){
         this.name = this.userName();
         let playerGrid = this.userInitialTurn();
+        this.pickShipLocation(playerGrid);
+    }
+
+    pickShipLocation(playerGrid){
         for (let i=0; i < 4; i++){
             console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
             let playerRow = this.setShipRow();
@@ -129,7 +133,8 @@ class Player {
             console.log("player row updated " + playerRow);
             let playerColumnCheck = this.shipBoundaryWidth(playerColumn, i);
             console.log("number check width: " + playerColumnCheck);
-            //this.shipBoundaryLength(playerRow, i);
+            let playerRowCheck = this.shipBoundaryLength(playerRow, i);
+            console.log("number check length: " + playerRowCheck);
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
         }
@@ -143,6 +148,7 @@ class Player {
         }
         return playerGrid;
     }
+
 
     shipBoundaryWidth(playerColumn, i){
         console.log("player column (width)" + playerColumn);
