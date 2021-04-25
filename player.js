@@ -119,7 +119,10 @@ class Player {
     runSetup(){
         this.name = this.userName();
         let playerGrid = this.userInitialTurn();
-        this.pickShipLocation(playerGrid);
+        playerGrid = this.pickShipLocation(playerGrid);
+        console.log("playerGrid from player run setup  =", playerGrid);
+        console.log("playerGrid length from player run setup =", playerGrid.length);
+        return playerGrid;
     }
 
     pickShipLocation(playerGrid){
@@ -149,14 +152,15 @@ class Player {
             //orientation needs to be checked.
             let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 console.log("Pass the orientation check.");
-                console.log(finalOrientChoice);
             //continue to fill in the spots for the ship depending on the size
             console.log("Check player grid prior to adding the length of the ship.");
             this.playerBoard.displayGrid(playerGrid);
             playerGrid = this.shipFill(playerRow, playerColumn, finalOrientChoice, this.playerShips[i].size, playerGrid);
             console.log("Check player grid after adding the length of the ship.");
             this.playerBoard.displayGrid(playerGrid);
-        }
+            console.log("playerGrid from player shiplocation  =", playerGrid);
+            console.log("playerGrid length from player shiplocation =", playerGrid.length);
+        }return playerGrid;
     }
 
     shipFill(row, column, orientation, shipSize, playerGrid){
