@@ -95,7 +95,8 @@ class Player {
         while(test === false){
             test = this.userValidationRow(userInputRow, 'Please input a letter from A-T');
             if (test === false){
-                userInputRow = prompt();
+                userInputRow = this.setShipRow();
+                return userInputRow;
             }
         }
         return userInputRow;
@@ -122,8 +123,9 @@ class Player {
     }
 
     pickShipLocation(playerGrid){
-        for (let i=0; i < 4; i++){
-            console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
+        for (let i=0; i < this.playerShips.length; i++){
+            console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + 
+                ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
             let playerRow = this.setShipRow();
             let playerColumn = this.setShipColumn();
             console.log("You picked " + playerRow.toUpperCase() + playerColumn);
@@ -137,8 +139,55 @@ class Player {
             console.log("number check length: " + playerRowCheck);
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
+            let orientChoice = prompt();
+            this.orientValidation(orientChoice);
+            this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, orientChoice);
         }
     }
+
+    orientValidation(orientChoice){
+        if (orientChoice >= 1 && orientChoice <= 4){
+            return orientChoice;
+        }else {
+            console.log("Please choose one of the options: \n1 - up, 2 - down, 3 - left, or 4 - right.");
+            orientChoice = prompt();
+            return orientChoice;
+        }
+    }
+
+    shipChoiceOrientation(playerColumnCheck, playerRowCheck, orientChoice){
+
+    }
+
+/*     shipChoiceOrientation(playerColumnCheck, playerRowCheck){
+        let commonMessage = "Please choose what orientation you would like to place the ship.\n"; 
+        if (playerColumnCheck == 0){
+            if (playerRowCheck == 0){
+                console.log(commonMessage + "Please choose up, down, left, or right.");
+            }else if(playerRowCheck == -1){
+                console.log(commonMessage + "Please choose up, left, or right.");
+            }else if(playerRowCheck == 1){
+                console.log(commonMessage + "Please choose down, left, or right.");
+            }
+        }else if(playerColumnCheck == -1){
+            if (playerRowCheck == 0){
+                console.log(commonMessage + "Please choose up, down, or right.");
+            }else if(playerRowCheck == -1){
+                console.log(commonMessage + "Please choose up or right.");
+            }else if(playerRowCheck == 1){
+                console.log(commonMessage + "Please choose down or right.");
+            }
+        }else if(playerColumnCheck == 1){
+            if (playerRowCheck == 0){
+                console.log(commonMessage + "Please choose up, down, or left.");
+            }else if(playerRowCheck == -1){
+                console.log(commonMessage + "Please choose up or left.");
+            }else if(playerRowCheck == 1){
+                console.log(commonMessage + "Please choose down or left.");
+            }
+        }
+    } */
 
     setShip(playerRow, playerColumn, playerGrid){
         if (playerColumn > 1 && playerColumn <= 10){
