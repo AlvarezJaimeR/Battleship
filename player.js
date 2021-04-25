@@ -140,13 +140,13 @@ class Player {
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
             console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
-            let orientChoice = prompt();
-            this.orientValidation(orientChoice);
-            this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, orientChoice);
+            this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+            console.log("Pass the orientation check.");
         }
     }
 
     orientValidation(orientChoice){
+        console.log("Starting orientation validation!");
         if (orientChoice >= 1 && orientChoice <= 4){
             return orientChoice;
         }else {
@@ -156,8 +156,36 @@ class Player {
         }
     }
 
-    shipChoiceOrientation(playerColumnCheck, playerRowCheck, orientChoice){
-
+    shipChoiceOrientation(playerColumnCheck, playerRowCheck){
+        console.log("Starting orientation check!");
+        let orientChoice = prompt();
+        this.orientValidation(orientChoice);
+        switch(orientChoice){
+            case '1': 
+                if(playerRowCheck == 1){
+                    console.log("Too close to the top boundary. Unable to place the piece with this orientation.");
+                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                }
+                break;
+            case '2':
+                if(playerRowCheck == -1){
+                    console.log("Too close to the bottom boundary. Unable to place the piece with this orientation.");
+                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                }
+                break;
+            case '3':
+                if(playerColumnCheck == -1){
+                    console.log("Too close to the left boundary. Unable to place the piece with this orientation.");
+                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                }
+                break;
+            case '4':
+                if(playerColumnCheck == 1){
+                    console.log("Too close to the right boundary. Unable to place the piece with this orientation.");
+                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                }
+                break;
+        }
     }
 
 /*     shipChoiceOrientation(playerColumnCheck, playerRowCheck){
