@@ -170,13 +170,25 @@ class Player {
                 return playerGrid;
             //down
             case '2':
-                break;
+                for(let i=1; i < shipSize; i++){
+                    playerGrid = this.setShip(row + 1, column, playerGrid);
+                    row ++;
+                }
+                return playerGrid;
             //left
             case '3':
-                break;
+                for(let i=1; i < shipSize; i++){
+                    playerGrid = this.setShip(row, column - 1, playerGrid);
+                    column --;
+                }
+                return playerGrid;
             //right
             case '4':
-                break;
+                for(let i=1; i < shipSize; i++){
+                    playerGrid = this.setShip(row, column + 1, playerGrid);
+                    column ++;
+                }
+                return playerGrid;
         }
     }
 
