@@ -124,25 +124,69 @@ class Player {
 
     pickShipLocation(playerGrid){
         for (let i=0; i < this.playerShips.length; i++){
+            //user decides the row and column for the ship location
             console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + 
                 ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
             let playerRow = this.setShipRow();
             let playerColumn = this.setShipColumn();
-            console.log("You picked " + playerRow.toUpperCase() + playerColumn);
-            console.log("player row pre update " + playerRow);
+                console.log("You picked " + playerRow.toUpperCase() + playerColumn);
+                console.log("player row pre update " + playerRow);
+            //convert the row to letter to an integer
             playerRow = playerRow.charCodeAt(playerRow)-96;
-            console.log("player column " + playerColumn);
-            console.log("player row updated " + playerRow);
+                console.log("player column " + playerColumn);
+                console.log("player row updated " + playerRow);
+            //check if the column chosen is close to the boundary
             let playerColumnCheck = this.shipBoundaryWidth(playerColumn, i);
-            console.log("number check width: " + playerColumnCheck);
+                console.log("number check width: " + playerColumnCheck);
+            //check if the row chosen is close to the boundary
             let playerRowCheck = this.shipBoundaryLength(playerRow, i);
-            console.log("number check length: " + playerRowCheck);
+                console.log("number check length: " + playerRowCheck);
+            //place the ship on the grid for a visual to the user
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
+            //user to decide the orientation of the ship
             console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
-            this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
-            console.log("Pass the orientation check.");
+            //orientation needs to be checked.
+            let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                console.log("Pass the orientation check.");
+                console.log(finalOrientChoice);
+            //continue to fill in the spots for the ship depending on the size
+            console.log("Check player grid prior to adding the length of the ship.");
+            this.playerBoard.displayGrid(playerGrid);
+            playerGrid = this.shipFill(playerRow, playerColumn, finalOrientChoice, this.playerShips[i].size, playerGrid);
+            console.log("Check player grid after adding the length of the ship.");
+            this.playerBoard.displayGrid(playerGrid);
         }
+    }
+
+    shipFill(row, column, orientation, shipSize, playerGrid){
+        switch(orientation){
+            //up
+            case '1':
+                for(let i=1; i < shipSize; i++){
+                    playerGrid = this.setShip(row - 1, column, playerGrid);
+                    row --;
+                }
+                return playerGrid;
+            //down
+            case '2':
+                break;
+            //left
+            case '3':
+                break;
+            //right
+            case '4':
+                break;
+        }
+    }
+
+    setShip(playerRow, playerColumn, playerGrid){
+        if (playerColumn >= 1 && playerColumn <= 10){
+            playerGrid[playerRow][playerColumn] = "  X  ";
+        }else {
+            playerGrid[playerRow][playerColumn] = "   X  ";
+        }
+        return playerGrid;
     }
 
     orientValidation(orientChoice){
@@ -166,66 +210,27 @@ class Player {
                     console.log("Too close to the top boundary. Unable to place the piece with this orientation.");
                     this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 }
-                break;
+                return orientChoice;
             case '2':
                 if(playerRowCheck == -1){
                     console.log("Too close to the bottom boundary. Unable to place the piece with this orientation.");
                     this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 }
-                break;
+                return orientChoice;
             case '3':
                 if(playerColumnCheck == -1){
                     console.log("Too close to the left boundary. Unable to place the piece with this orientation.");
                     this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 }
-                break;
+                return orientChoice;
             case '4':
                 if(playerColumnCheck == 1){
                     console.log("Too close to the right boundary. Unable to place the piece with this orientation.");
                     this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 }
-                break;
+                return orientChoice;
         }
-    }
-
-/*     shipChoiceOrientation(playerColumnCheck, playerRowCheck){
-        let commonMessage = "Please choose what orientation you would like to place the ship.\n"; 
-        if (playerColumnCheck == 0){
-            if (playerRowCheck == 0){
-                console.log(commonMessage + "Please choose up, down, left, or right.");
-            }else if(playerRowCheck == -1){
-                console.log(commonMessage + "Please choose up, left, or right.");
-            }else if(playerRowCheck == 1){
-                console.log(commonMessage + "Please choose down, left, or right.");
-            }
-        }else if(playerColumnCheck == -1){
-            if (playerRowCheck == 0){
-                console.log(commonMessage + "Please choose up, down, or right.");
-            }else if(playerRowCheck == -1){
-                console.log(commonMessage + "Please choose up or right.");
-            }else if(playerRowCheck == 1){
-                console.log(commonMessage + "Please choose down or right.");
-            }
-        }else if(playerColumnCheck == 1){
-            if (playerRowCheck == 0){
-                console.log(commonMessage + "Please choose up, down, or left.");
-            }else if(playerRowCheck == -1){
-                console.log(commonMessage + "Please choose up or left.");
-            }else if(playerRowCheck == 1){
-                console.log(commonMessage + "Please choose down or left.");
-            }
-        }
-    } */
-
-    setShip(playerRow, playerColumn, playerGrid){
-        if (playerColumn > 1 && playerColumn <= 10){
-            playerGrid[playerRow][playerColumn] = "  X  ";
-        }else {
-            playerGrid[playerRow][playerColumn] = "   X  ";
-        }
-        return playerGrid;
-    }
-
+    } 
 
     shipBoundaryWidth(playerColumn, i){
         console.log("player column (width)" + playerColumn);
