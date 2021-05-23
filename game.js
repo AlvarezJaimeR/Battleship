@@ -2,7 +2,6 @@
 const Gameboard = require('./gameboard');
 const Player = require('./player');
 
-
 class Game{
     constructor(){
         this.playerOne = new Player();
@@ -13,11 +12,10 @@ class Game{
         this.displayRules();
         let playerOneGrid = this.playerOne.runSetup();
         console.log("Finished displaying the first player one grid.");
-        console.log("playerOneGrid =" +  playerOneGrid);
         console.log("playerOneGrid length =" + playerOneGrid.length);
         this.playerOne.playerBoard.displayGrid(playerOneGrid);
-        let playerTwoGrid = this.playerTwo.runSetup();
-        this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
+/*         let playerTwoGrid = this.playerTwo.runSetup();
+        this.playerTwo.playerBoard.displayGrid(playerTwoGrid); */
     }
 
     displayRules(){

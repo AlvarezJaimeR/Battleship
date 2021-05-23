@@ -120,16 +120,17 @@ class Player {
         this.name = this.userName();
         let playerGrid = this.userInitialTurn();
         playerGrid = this.pickShipLocation(playerGrid);
-        console.log("playerGrid from player run setup  =", playerGrid);
-        console.log("playerGrid length from player run setup =", playerGrid.length);
+/*         console.log("playerGrid from player run setup  =", playerGrid);
+        console.log("playerGrid length from player run setup =", playerGrid.length); */
         return playerGrid;
     }
 
     pickShipLocation(playerGrid){
+        let playerGridInput = playerGrid;
         for (let i=0; i < this.playerShips.length; i++){
             //user decides the row and column for the ship location
-            console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + 
-                ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
+                console.log(this.name + " -- Please decide where to place your ship " + this.playerShips[i].name + 
+                    ", size " + this.playerShips[i].size + ", (ex. row G column 10).");
             let playerRow = this.setShipRow();
             let playerColumn = this.setShipColumn();
                 console.log("You picked " + playerRow.toUpperCase() + playerColumn);
@@ -138,6 +139,9 @@ class Player {
             playerRow = playerRow.charCodeAt(playerRow)-96;
                 console.log("player column " + playerColumn);
                 console.log("player row updated " + playerRow);
+            //check if the column / row is already occupied 
+            let shipSpot = this.checkSpot(playerRow, playerColumn, playerGridInput);
+                console.log("allowed to place ship: ",shipSpot);
             //check if the column chosen is close to the boundary
             let playerColumnCheck = this.shipBoundaryWidth(playerColumn, i);
                 console.log("number check width: " + playerColumnCheck);
@@ -148,19 +152,30 @@ class Player {
             playerGrid = this.setShip(playerRow, playerColumn, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
             //user to decide the orientation of the ship
-            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
+                console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
             //orientation needs to be checked.
             let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
                 console.log("Pass the orientation check.");
             //continue to fill in the spots for the ship depending on the size
-            console.log("Check player grid prior to adding the length of the ship.");
+                console.log("Check player grid prior to adding the length of the ship.");
             this.playerBoard.displayGrid(playerGrid);
             playerGrid = this.shipFill(playerRow, playerColumn, finalOrientChoice, this.playerShips[i].size, playerGrid);
-            console.log("Check player grid after adding the length of the ship.");
+                console.log("Check player grid after adding the length of the ship.");
             this.playerBoard.displayGrid(playerGrid);
-            console.log("playerGrid from player shiplocation  =", playerGrid);
-            console.log("playerGrid length from player shiplocation =", playerGrid.length);
         }return playerGrid;
+    }
+
+    checkSpot(row, column, grid){
+        console.log(row);
+        console.log(column);
+        //console.log(grid);
+        let spot = grid[row][column];
+        console.log('Check spot', spot);
+        if (grid[row][column] !== "  X  " || grid[row][column] !== "   X  "){
+            return false;
+        }
+        else 
+            return true;
     }
 
     shipFill(row, column, orientation, shipSize, playerGrid){
