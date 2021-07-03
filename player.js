@@ -154,12 +154,57 @@ class Player {
         //check if the row chosen is close to the boundary
         let playerRowCheck = this.shipBoundaryLength(this.row, i);
             console.log("number check length: " + playerRowCheck);
+        //filter the player's choice
         //user to decide the orientation of the ship
-            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
+        let filteredChoice = this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
+            console.log("filteredChoice", filteredChoice);
         //orientation needs to be checked.
         let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
             console.log("Pass the orientation check.");
         return finalOrientChoice;
+    }
+
+    filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck){
+        let filteredChoice = 0;
+        if (playerColumnCheck === 0 && playerRowCheck === 0){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, 3 - left, or 4 - right.");
+            filteredChoice = 0;
+            return filteredChoice;
+        } else if (playerColumnCheck === 1 && playerRowCheck === 0){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 3 - left, or 4 - right.");
+            filteredChoice = 1
+            return filteredChoice;
+        } else if (playerColumnCheck === -1 && playerRowCheck === 0){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n2 - down, 3 - left, or 4 - right.");
+            filteredChoice = 2
+            return filteredChoice;
+        } else if (playerColumnCheck === 0 && playerRowCheck === -1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, or 3 - left.");
+            filteredChoice = 3
+            return filteredChoice;
+        } else if (playerColumnCheck === 0 && playerRowCheck === 1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up, 2 - down, or 4 - right.");
+            filteredChoice = 4
+            return filteredChoice;
+        } else if (playerColumnCheck === 1 && playerRowCheck === -1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up or 3 - left.");
+            filteredChoice = 5
+            return filteredChoice;
+        } else if (playerColumnCheck === 1 && playerRowCheck === 1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n1 - up or 4 - right.");
+            filteredChoice = 6
+            return filteredChoice;
+        } else if (playerColumnCheck === -1 && playerRowCheck === -1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n2 - down or 3 - left.");
+            filteredChoice = 7
+            return filteredChoice;
+        } else if (playerColumnCheck === -1 && playerRowCheck === 1){
+            console.log("What orientation would you like to place the ship? pick a number to designate the oritentation: \n2 - down or 4 - right.");
+            filteredChoice = 8
+            return filteredChoice;
+        }
+        console.log('filteredPlayerChoice', filteredChoice);
+        return filteredChoice;
     }
 
     pickShipLocation(playerGrid){
@@ -206,12 +251,8 @@ class Player {
             //up
             case '1':
                 for(let i=1; i < shipSize; i++){
-                    if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
-                        playerGrid = this.setShip(row - 1, column, playerGrid);
-                        row --;
-                    }else {
-                        
-                    }
+                    playerGrid = this.setShip(row - 1, column, playerGrid);
+                    row --;
                 }
                 return playerGrid;
             //down
@@ -259,8 +300,8 @@ class Player {
     }
 
     shipChoiceOrientation(playerColumnCheck, playerRowCheck){
-        console.log("Starting orientation check!");
         let orientChoice = prompt();
+        console.log("Starting orientation check!");
         this.orientValidation(orientChoice);
         switch(orientChoice){
             case '1': 
@@ -311,13 +352,13 @@ class Player {
     }
 
     shipBoundaryLength(playerRow, i){
-        console.log("player row (width)" + playerRow);
+        console.log("player row (length)" + playerRow);
         let topBound = this.playerBoard.checkTopBoundary(playerRow, this.playerShips[i].size);
         let bottomBound = this.playerBoard.checkBottomBoundary(playerRow, this.playerShips[i].size);
         console.log("top bound: ", topBound);
         console.log("bottom bound: ", bottomBound);
         if(topBound === true && bottomBound === true){
-            console.log("No bounds on width.");
+            console.log("No bounds on length.");
             return 0;
         }else if(topBound === true && bottomBound === false) {
             console.log("Not able to place the ship orientation down.");
