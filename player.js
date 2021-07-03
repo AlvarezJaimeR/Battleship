@@ -147,10 +147,14 @@ class Player {
         return true;
     }
 
-    checkBoundary(i){
+    checkBoundary(i, grid){
         //check if the column chosen is close to the boundary
         let playerColumnCheck = this.shipBoundaryWidth(this.column, i);
             console.log("number check width: " + playerColumnCheck);
+        let playerColumnCheckLeft = this.shipColumnCheckLeft(this.column, this.row, i, grid);
+            console.log("left check", playerColumnCheckLeft);
+        let playerColumnCheckRight = this.shipColumnCheckRight(this.column, this.row, i, grid);
+            console.log("right check", playerColumnCheckRight);
         //check if the row chosen is close to the boundary
         let playerRowCheck = this.shipBoundaryLength(this.row, i);
             console.log("number check length: " + playerRowCheck);
@@ -221,7 +225,7 @@ class Player {
             playerGrid = this.setShip(this.row, this.column, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
             //check boundaries
-            let userOrientChoice = this.checkBoundary(i);
+            let userOrientChoice = this.checkBoundary(i, playerGrid);
             //continue to fill in the spots for the ship depending on the size
                 console.log("Check player grid prior to adding the length of the ship.");
             this.playerBoard.displayGrid(playerGrid);
@@ -230,20 +234,6 @@ class Player {
             this.playerBoard.displayGrid(playerGrid);
         }
         return playerGrid;
-    }
-
-    checkSpot(row, column, grid){
-        console.log(row);
-        console.log(column);
-        //console.log(grid);
-        let spot = grid[row][column];
-        console.log('Check spot', spot);
-        if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
-            return true;
-        }
-        else 
-            console.log("Unable to choose specific spot since it's already occupied.");
-            return false;
     }
 
     shipFill(row, column, orientation, shipSize, playerGrid){
@@ -330,6 +320,48 @@ class Player {
                 return orientChoice;
         }
     } 
+
+    checkSpot(row, column, grid){
+        console.log(row);
+        console.log(column);
+        //console.log(grid);
+        let spot = grid[row][column];
+        console.log('Check spot', spot);
+        if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
+            return true;
+        }
+        else 
+            console.log("Unable to choose specific spot since it's already occupied.");
+            return false;
+    }
+
+    shipColumnCheckLeft(playerColumn, playerRow, i, grid){
+        console.log(this.playerShips[i].size);
+        console.log(playerColumn , playerRow);
+        let left = true;       
+        for (let j = 0; j < this.playerShips[i].size; j++){
+            left = this.checkSpot(playerRow, playerColumn - 1, grid);
+            playerColumn --;
+            if (left === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    shipColumnCheckRight(playerColumn, playerRow, i, grid){
+        console.log(this.playerShips[i].size);
+        console.log(playerColumn, playerRow);
+        let right = true;
+        for (let j = 0; j < this.playerShips[i].size; j++){
+            right = this.checkSpot(playerRow, playerColumn + 1, grid);
+            playerColumn ++;
+            if (right === false) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     shipBoundaryWidth(playerColumn, i){
         console.log("player column (width)" + playerColumn);
