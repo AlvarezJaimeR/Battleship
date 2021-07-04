@@ -348,9 +348,6 @@ class Player {
     } 
 
     checkSpot(row, column, grid){
-        console.log(row);
-        console.log(column);
-        //console.log(grid);
         let spot = grid[row][column];
         console.log('Check spot', spot);
         if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
