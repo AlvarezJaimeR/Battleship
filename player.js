@@ -158,6 +158,10 @@ class Player {
         //check if the row chosen is close to the boundary
         let playerRowCheck = this.shipBoundaryLength(this.row, i);
             console.log("number check length: " + playerRowCheck);
+        let playerRowCheckUp = this.shipRowCheckUp(this.column, this.row, i, grid);
+            console.log("up check", playerRowCheckUp);
+        let playerRowCheckDown = this.shipRowCheckDown(this.column, this.row, i, grid);
+            console.log("down check", playerRowCheckDown);
         //filter the player's choice
         //user to decide the orientation of the ship
         let filteredChoice = this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
@@ -357,6 +361,34 @@ class Player {
             right = this.checkSpot(playerRow, playerColumn + 1, grid);
             playerColumn ++;
             if (right === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    shipRowCheckUp(playerColumn, playerRow, i, grid){
+        console.log(this.playerShips[i].size);
+        console.log(playerColumn, playerRow);
+        let up = true;
+        for (let j = 0; j < this.playerShips[i].size; j++){
+            up = this.checkSpot(playerRow - 1, playerColumn, grid);
+            playerRow --;
+            if (up === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    shipRowCheckDown(playerColumn, playerRow, i, grid){
+        console.log(this.playerShips[i].size);
+        console.log(playerColumn, playerRow);
+        let down = true;
+        for (let j = 0; j < this.playerShips[i].size; j++){
+            down = this.checkSpot(playerRow + 1, playerColumn, grid);
+            playerRow ++;
+            if (down === false) {
                 return false;
             }
         }
