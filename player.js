@@ -167,11 +167,11 @@ class Player {
         let filteredChoice = this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
             console.log("filteredChoice", filteredChoice);
         //orientation needs to be checked.
-        let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp);
+        let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp, playerRowCheckDown, playerColumnCheckLeft, playerColumnCheckRight);
             console.log("Pass the orientation check.", finalOrientChoice); 
             while (finalOrientChoice === undefined){
                 this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
-                finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp);
+                finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp, playerRowCheckDown, playerColumnCheckLeft, playerColumnCheckRight);
             }
             console.log("Final pass orient check.", finalOrientChoice);
         return finalOrientChoice;
@@ -298,7 +298,7 @@ class Player {
         }
     }
 
-    shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck){
+    shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck, downCheck, leftCheck, rightCheck){
         let orientChoice = prompt();
         console.log("Starting orientation check!");
         orientChoice = this.orientValidation(orientChoice);
@@ -307,11 +307,9 @@ class Player {
             case '1': 
                 if(playerRowCheck == 1){
                     console.log("Too close to the top boundary. Unable to place the piece with this orientation.");
-                    //this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck);
                     break;
                 } else if (upCheck === false){
                     console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
-                    //this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck);
                     break;
                 }
                 console.log("up", orientChoice);
@@ -319,21 +317,32 @@ class Player {
             case '2':
                 if(playerRowCheck == -1){
                     console.log("Too close to the bottom boundary. Unable to place the piece with this orientation.");
-                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                    break;
+                } else if (downCheck === false){
+                    console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
+                    break;
                 }
-                console.log("down", orientChoice)
+                console.log("down", orientChoice);
                 return orientChoice;
             case '3':
                 if(playerColumnCheck == -1){
                     console.log("Too close to the left boundary. Unable to place the piece with this orientation.");
-                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                    break;
+                } else if (leftCheck === false){
+                    console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
+                    break;
                 }
+                console.log("left", orientChoice);
                 return orientChoice;
             case '4':
                 if(playerColumnCheck == 1){
                     console.log("Too close to the right boundary. Unable to place the piece with this orientation.");
-                    this.shipChoiceOrientation(playerColumnCheck, playerRowCheck);
+                    break;
+                } else if (rightCheck === false){
+                    console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
+                    break;
                 }
+                console.log("right", orientChoice);
                 return orientChoice;
         }
     } 
