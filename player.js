@@ -299,6 +299,7 @@ class Player {
     }
 
     shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck, downCheck, leftCheck, rightCheck){
+        console.log(playerColumnCheck, playerRowCheck);
         let orientChoice = prompt();
         console.log("Starting orientation check!");
         orientChoice = this.orientValidation(orientChoice);
@@ -348,6 +349,12 @@ class Player {
     } 
 
     checkSpot(row, column, grid){
+        console.log(row);
+        console.log(column);
+        if (row === 21 || column === 21){
+            console.log("Hitting the boundary.");
+            return false;
+        }
         let spot = grid[row][column];
         console.log('Check spot', spot);
         if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
@@ -362,7 +369,7 @@ class Player {
         console.log(this.playerShips[i].size);
         console.log(playerColumn , playerRow);
         let left = true;       
-        for (let j = 0; j < this.playerShips[i].size; j++){
+        for (let j = 0; j < this.playerShips[i].size - 1; j++){
             left = this.checkSpot(playerRow, playerColumn - 1, grid);
             playerColumn --;
             if (left === false) {
@@ -376,7 +383,7 @@ class Player {
         console.log(this.playerShips[i].size);
         console.log(playerColumn, playerRow);
         let right = true;
-        for (let j = 0; j < this.playerShips[i].size; j++){
+        for (let j = 0; j < this.playerShips[i].size - 1; j++){
             right = this.checkSpot(playerRow, playerColumn + 1, grid);
             playerColumn ++;
             if (right === false) {
@@ -390,7 +397,7 @@ class Player {
         console.log(this.playerShips[i].size);
         console.log(playerColumn, playerRow);
         let up = true;
-        for (let j = 0; j < this.playerShips[i].size; j++){
+        for (let j = 0; j < this.playerShips[i].size - 1; j++){
             up = this.checkSpot(playerRow - 1, playerColumn, grid);
             playerRow --;
             if (up === false) {
@@ -404,7 +411,7 @@ class Player {
         console.log(this.playerShips[i].size);
         console.log(playerColumn, playerRow);
         let down = true;
-        for (let j = 0; j < this.playerShips[i].size; j++){
+        for (let j = 0; j < this.playerShips[i].size - 1; j++){
             down = this.checkSpot(playerRow + 1, playerColumn, grid);
             playerRow ++;
             if (down === false) {
