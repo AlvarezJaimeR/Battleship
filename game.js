@@ -11,11 +11,17 @@ class Game{
     runGame(){
         this.displayRules();
         let playerOneGrid = this.playerOne.runSetup();
-        console.log("Finished displaying the first player one grid.");
-        console.log("playerOneGrid length =" + playerOneGrid.length);
+        console.log("Finished displaying the first player grid.");
+        //console.log("playerOneGrid length =" + playerOneGrid.length);
+        console.log(playerOneGrid);
         this.playerOne.playerBoard.displayGrid(playerOneGrid);
+        console.log("Enemy Grid");
+        this.playerOne.enemyBoard.enemyGrid(playerOneGrid);
 /*         let playerTwoGrid = this.playerTwo.runSetup();
-        this.playerTwo.playerBoard.displayGrid(playerTwoGrid); */
+        console.log("Finished displaying the second player grid.");
+        this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
+        console.log("This is the enemy grid! (Player Two's Grid)");
+        this.playerOne.enemyBoard.enemyGrid(playerTwoGrid); */
     }
 
     displayRules(){

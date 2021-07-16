@@ -51,6 +51,20 @@ class Gameboard {
         }
     }
 
+    enemyGrid = (grid) => {
+        for (let i = 0; i < grid.length; i++) {
+            for (let j = 0; j < grid.length; j++){
+                if (grid[i][j] === "  X  "){
+                    grid[i][j] = "  -  ";
+                }
+                else if (grid[i][j] === "   X  "){
+                    grid[i][j] = "   -  ";
+                }
+            }
+            console.log(grid[i].join(""));
+        }
+    }
+
     checkRightBoundary(pickedColumn, shipSize){
         console.log("right bound " + pickedColumn + " " + shipSize);
         if (this.width - 1 - pickedColumn - shipSize + 1 < 0){
