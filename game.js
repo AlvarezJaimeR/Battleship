@@ -10,15 +10,12 @@ class Game{
 
     runGame(){
         this.displayRules();
-        let playerOneGrid = this.playerOne.runSetup();
+        this.playerOne.runSetup();
         console.log("Finished displaying the first player grid.");
-        //console.log("playerOneGrid length =" + playerOneGrid.length);
-        console.log(playerOneGrid);
-        this.playerOne.playerBoard.displayGrid(playerOneGrid);
+        this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
         console.log(this.playerOne);
         console.log("Enemy Grid");
-        this.playerOne.enemyBoard.enemyGrid(playerOneGrid);
-        console.log(this.playerOne);
+        this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
         //this.playerOne.playerAttack();
 /*         let playerTwoGrid = this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");

@@ -13,6 +13,8 @@ class Player {
         this.playerShips = [new Destroyer(), new Submarine(), new Battleship(), new AircraftCarrier()]; 
         this.row = '';
         this.column = '';
+        this.playerGrid;
+        this.enemyGrid;
     }
 
     //main function that runs the initial set up
@@ -21,6 +23,8 @@ class Player {
         this.playerBoard.name = this.name;
         let playerGrid = this.userInitialTurn();
         playerGrid = this.pickShipLocation(playerGrid);
+        this.playerGrid = playerGrid;
+        this.enemyGrid = this.enemyBoard.startGrid();
 /*         console.log("playerGrid from player run setup  =", playerGrid);
         console.log("playerGrid length from player run setup =", playerGrid.length); */
         return playerGrid;
