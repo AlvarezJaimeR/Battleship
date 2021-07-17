@@ -18,11 +18,17 @@ class Player {
     //main function that runs the initial set up
     runSetup(){
         this.name = this.userName();
+        this.playerBoard.name = this.name;
         let playerGrid = this.userInitialTurn();
         playerGrid = this.pickShipLocation(playerGrid);
 /*         console.log("playerGrid from player run setup  =", playerGrid);
         console.log("playerGrid length from player run setup =", playerGrid.length); */
         return playerGrid;
+    }
+
+    playerAttack(grid){
+        this.playerChoice();
+        console.log(grid);
     }
 
     userName(){

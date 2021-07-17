@@ -15,8 +15,11 @@ class Game{
         //console.log("playerOneGrid length =" + playerOneGrid.length);
         console.log(playerOneGrid);
         this.playerOne.playerBoard.displayGrid(playerOneGrid);
+        console.log(this.playerOne);
         console.log("Enemy Grid");
         this.playerOne.enemyBoard.enemyGrid(playerOneGrid);
+        console.log(this.playerOne);
+        //this.playerOne.playerAttack();
 /*         let playerTwoGrid = this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");
         this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
