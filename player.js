@@ -22,8 +22,7 @@ class Player {
         this.name = this.userName();
         this.playerBoard.name = this.name;
         let playerGrid = this.userInitialTurn();
-        playerGrid = this.pickShipLocation(playerGrid);
-        this.playerGrid = playerGrid;
+        this.playerGrid = this.pickShipLocation(playerGrid);
         this.enemyGrid = this.enemyBoard.startGrid();
 /*         console.log("playerGrid from player run setup  =", playerGrid);
         console.log("playerGrid length from player run setup =", playerGrid.length); */
@@ -31,8 +30,14 @@ class Player {
     }
 
     playerAttack(grid){
+        //user decides the row and column for the ship location
+            console.log(this.name + " -- Please decide where to attack! (ex. row G column 10).");
         this.playerChoice();
-        console.log(grid);
+        //check if the column / row is already occupied 
+        let secondCheck = this.checkSpot(this.row, this.column, grid);
+        let loopChoice = this.loopSpot(secondCheck, grid);
+            console.log('able to attack here', loopChoice);
+        //console.log(grid);
     }
 
     userName(){
