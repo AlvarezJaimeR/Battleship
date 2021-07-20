@@ -37,6 +37,8 @@ class Player {
         let secondCheck = this.checkSpot(this.row, this.column, grid);
         let loopChoice = this.loopSpot(secondCheck, grid);
             console.log('able to attack here', loopChoice);
+            console.log(this.row, this.column);
+        this.enemyGrid = this.setAttack(this.row, this.column, grid);
         //console.log(grid);
     }
 
@@ -298,6 +300,15 @@ class Player {
             playerGrid[playerRow][playerColumn] = "  X  ";
         }else {
             playerGrid[playerRow][playerColumn] = "   X  ";
+        }
+        return playerGrid;
+    }
+
+    setAttack(playerRow, playerColumn, playerGrid){
+        if (playerColumn >= 1 && playerColumn <= 10){
+            playerGrid[playerRow][playerColumn] = "  A  ";
+        }else {
+            playerGrid[playerRow][playerColumn] = "   A  ";
         }
         return playerGrid;
     }

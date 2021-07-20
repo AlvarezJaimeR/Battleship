@@ -17,6 +17,7 @@ class Game{
         console.log("Enemy Grid");
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
         this.playerOne.playerAttack(this.playerOne.enemyGrid);
+        this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
 /*         let playerTwoGrid = this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");
         this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
