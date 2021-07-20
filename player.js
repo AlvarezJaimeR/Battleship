@@ -29,7 +29,7 @@ class Player {
         return playerGrid;
     }
 
-    playerAttack(grid){
+    playerAttack(grid, playerGrid){
         //user decides the row and column for the ship location
             console.log(this.name + " -- Please decide where to attack! (ex. row G column 10).");
         this.playerChoice();
@@ -38,6 +38,8 @@ class Player {
         let loopChoice = this.loopSpot(secondCheck, grid);
             console.log('able to attack here', loopChoice);
             console.log(this.row, this.column);
+        let hit = this.checkForShip(this.row, this.column, playerGrid);
+            console.log("Hit", hit);
         this.enemyGrid = this.setAttack(this.row, this.column, grid);
         //console.log(grid);
     }
@@ -388,6 +390,20 @@ class Player {
         }
         else 
             console.log("Unable to choose specific spot since it's already occupied.");
+            return false;
+    }
+
+    checkForShip(row, column, grid){
+        console.log(row);
+        console.log(column);
+        let spot = grid[row][column];
+        console.log('Check spot', spot);
+        if (grid[row][column] === "  X  " || grid[row][column] === "   X  "){
+            console.log("HIT!!!");
+            return true;
+        }
+        else 
+            console.log("Swing and a miss...");
             return false;
     }
 
