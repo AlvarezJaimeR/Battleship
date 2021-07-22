@@ -40,7 +40,7 @@ class Player {
             console.log(this.row, this.column);
         let hit = this.checkForShip(this.row, this.column, playerGrid);
             console.log("Hit", hit);
-        this.enemyGrid = this.setAttack(this.row, this.column, grid);
+        this.enemyGrid = this.setAttack(this.row, this.column, grid, hit);
         //console.log(grid);
     }
 
@@ -306,11 +306,20 @@ class Player {
         return playerGrid;
     }
 
-    setAttack(playerRow, playerColumn, playerGrid){
-        if (playerColumn >= 1 && playerColumn <= 10){
-            playerGrid[playerRow][playerColumn] = "  A  ";
-        }else {
-            playerGrid[playerRow][playerColumn] = "   A  ";
+    setAttack(playerRow, playerColumn, playerGrid, hit){
+        if (hit === true){
+            if (playerColumn >= 1 && playerColumn <= 10){
+                playerGrid[playerRow][playerColumn] = "  H  ";
+            }else {
+                playerGrid[playerRow][playerColumn] = "   H  ";
+            }
+        }
+        else if (hit === false){
+            if (playerColumn >= 1 && playerColumn <= 10){
+                playerGrid[playerRow][playerColumn] = "  M  ";
+            }else {
+                playerGrid[playerRow][playerColumn] = "   M  ";
+            }
         }
         return playerGrid;
     }
