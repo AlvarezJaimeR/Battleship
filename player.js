@@ -284,6 +284,9 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row + 1, column, playerGrid);
                     row ++;
+                    this.playerShips[shipIndex].spot.push([row,column]);
+                    console.log(this.playerShips[shipIndex].name);
+                    console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
             //left
@@ -291,6 +294,9 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row, column - 1, playerGrid);
                     column --;
+                    this.playerShips[shipIndex].spot.push([row,column]);
+                    console.log(this.playerShips[shipIndex].name);
+                    console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
             //right
@@ -298,6 +304,9 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row, column + 1, playerGrid);
                     column ++;
+                    this.playerShips[shipIndex].spot.push([row,column]);
+                    console.log(this.playerShips[shipIndex].name);
+                    console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
         }
