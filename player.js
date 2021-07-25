@@ -256,8 +256,9 @@ class Player {
             let userOrientChoice = this.checkBoundary(i, playerGrid);
             //continue to fill in the spots for the ship depending on the size
                 console.log("Check player grid prior to adding the length of the ship.");
-                this.playerShips[i].spot.push([this.row, this.column]);
+                this.playerShips[i].spot.push({"row": this.row, "column": this.column, "hitStatus":false});
                 console.log("current ship location", this.playerShips[i].spot);
+                console.log(this.playerShips[i].spot[0]);
             this.playerBoard.displayGrid(playerGrid);
             playerGrid = this.shipFill(this.row, this.column, userOrientChoice, this.playerShips[i].size, playerGrid, i);
                 console.log("Check player grid after adding the length of the ship.");
@@ -274,7 +275,7 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row - 1, column, playerGrid);
                     row --;
-                    this.playerShips[shipIndex].spot.push([row,column]);
+                    this.playerShips[shipIndex].spot.push({"row": row, "column": this.column, "hitStatus":false});
                     console.log(this.playerShips[shipIndex].name);
                     console.log(this.playerShips[shipIndex].spot);
                 }
@@ -284,7 +285,7 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row + 1, column, playerGrid);
                     row ++;
-                    this.playerShips[shipIndex].spot.push([row,column]);
+                    this.playerShips[shipIndex].spot.push([row,column,false]);
                     console.log(this.playerShips[shipIndex].name);
                     console.log(this.playerShips[shipIndex].spot);
                 }
@@ -294,7 +295,7 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row, column - 1, playerGrid);
                     column --;
-                    this.playerShips[shipIndex].spot.push([row,column]);
+                    this.playerShips[shipIndex].spot.push([row,column,false]);
                     console.log(this.playerShips[shipIndex].name);
                     console.log(this.playerShips[shipIndex].spot);
                 }
@@ -304,7 +305,7 @@ class Player {
                 for(let i=1; i < shipSize; i++){
                     playerGrid = this.setShip(row, column + 1, playerGrid);
                     column ++;
-                    this.playerShips[shipIndex].spot.push([row,column]);
+                    this.playerShips[shipIndex].spot.push([row,column,false]);
                     console.log(this.playerShips[shipIndex].name);
                     console.log(this.playerShips[shipIndex].spot);
                 }
