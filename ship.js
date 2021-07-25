@@ -4,8 +4,7 @@ class Ship{
     constructor(name, size){
         this.name = name;
         this.size = size;
-        this.spot = [
-        ];
+        this.spot = [];
     }
 }
 
