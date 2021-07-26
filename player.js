@@ -29,18 +29,19 @@ class Player {
         return playerGrid;
     }
 
-    playerAttack(grid, playerGrid){
+    playerAttack(enemyGrid, playerGrid){
         //user decides the row and column for the ship location
             console.log(this.name + " -- Please decide where to attack! (ex. row G column 10).");
         this.playerChoice();
         //check if the column / row is already occupied 
-        let secondCheck = this.checkSpot(this.row, this.column, grid);
-        let loopChoice = this.loopSpot(secondCheck, grid);
+        let secondCheckSpot = this.checkSpot(this.row, this.column, enemyGrid);
+        let loopChoice = this.loopSpot(secondCheckSpot, enemyGrid);
             console.log('able to attack here', loopChoice);
             console.log(this.row, this.column);
         let hit = this.checkForShip(this.row, this.column, playerGrid);
             console.log("Hit", hit);
-        this.enemyGrid = this.setAttack(this.row, this.column, grid, hit);
+        this.enemyGrid = this.setAttack(this.row, this.column, enemyGrid, hit);
+        this.shipHealth(this.row, this.column, hit);
         //console.log(grid);
     }
 
@@ -255,7 +256,6 @@ class Player {
             //check boundaries
             let userOrientChoice = this.checkBoundary(i, playerGrid);
             //continue to fill in the spots for the ship depending on the size
-                console.log("Check player grid prior to adding the length of the ship.");
                 this.playerShips[i].spot.push({"row": this.row, "column": this.column, "hitStatus":false});
                 console.log("current ship location", this.playerShips[i].spot);
                 console.log(this.playerShips[i].spot[0].hitStatus);
@@ -263,9 +263,33 @@ class Player {
             playerGrid = this.shipFill(this.row, this.column, userOrientChoice, this.playerShips[i].size, playerGrid, i);
                 console.log("Check player grid after adding the length of the ship.");
                 console.log(this.playerShips[i].spot);
+                console.log("Ship information",this.playerShips[i]);
             this.playerBoard.displayGrid(playerGrid);
         }
         return playerGrid;
+    }
+
+    shipHealth(row, column, hit){
+        console.log("Checking ship health");
+        if (hit === true){
+            for (let i = 0; i < this.playerShips.length; i++){
+                console.log(this.playerShips.length);
+                for (let j = 0; j < this.playerShips[i].spot.length; j++){
+                    console.log(this.playerShips[i].spot.length);
+                    if (this.playerShips[i].spot[j].row === row && this.playerShips[i].spot[j].column === column){
+                        this.playerShips[i].spot[j].hitStatus = true;
+                        console.log(this.playerShips[i]);
+                        console.log("Current ship that got hit is the ", this.playerShips[i].name);
+                        console.log("You hit spot # ", j+1, " of the ship");
+                    }else {
+                        console.log("Skipping ship ", this.playerShips[i].name);
+                    }
+                }
+            }
+        }
+        else if (hit === false) {
+            console.log("Didn't hit a ship. No changes to ship health.");
+        }
     }
 
     shipFill(row, column, orientation, shipSize, playerGrid, shipIndex){

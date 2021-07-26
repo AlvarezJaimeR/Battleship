@@ -5,6 +5,7 @@ class Ship{
         this.name = name;
         this.size = size;
         this.spot = [];
+        this.shipHealth = 0;
     }
 }
 
