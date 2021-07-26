@@ -273,7 +273,6 @@ class Player {
         console.log("Checking ship health");
         if (hit === true){
             for (let i = 0; i < this.playerShips.length; i++){
-                console.log(this.playerShips.length);
                 for (let j = 0; j < this.playerShips[i].spot.length; j++){
                     console.log(this.playerShips[i].spot.length);
                     if (this.playerShips[i].spot[j].row === row && this.playerShips[i].spot[j].column === column){
@@ -282,6 +281,9 @@ class Player {
                         console.log(this.playerShips[i]);
                         console.log("Current ship that got hit is the",this.playerShips[i].name);
                         console.log("You hit spot #",j+1,"of the ship");
+                        if (this.playerShips[i].shipHealth === this.playerShips[i].spot.length){
+                            console.log("You sunk the",this.playerShips[i].name);
+                        }
                         return;
                     }else {
                         console.log("Skipping ship ", this.playerShips[i].name);
