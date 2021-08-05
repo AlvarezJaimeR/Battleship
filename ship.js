@@ -6,6 +6,7 @@ class Ship{
         this.size = size;
         this.spot = [];
         this.shipHealth = 0;
+        this.sunk = false;
     }
 }
 

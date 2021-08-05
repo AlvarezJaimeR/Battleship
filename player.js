@@ -151,11 +151,11 @@ class Player {
         this.row = this.setShipRow();
         this.column = this.setShipColumn();
             console.log("You picked " + this.row.toUpperCase() + this.column);
-            console.log("player row pre update " + this.row);
+            //console.log("player row pre update " + this.row);
         //convert the row to letter to an integer
         this.row = this.row.charCodeAt(this.row)-96;
-            console.log("player column " + this.column);
-            console.log("player row updated " + this.row);
+            //console.log("player column " + this.column);
+            //console.log("player row updated " + this.row);
     }
 
     loopSpot(check, playerGrid){
@@ -170,22 +170,22 @@ class Player {
     checkBoundary(i, grid){
         //check if the column chosen is close to the boundary
         let playerColumnCheck = this.shipBoundaryWidth(this.column, i);
-            console.log("number check width: " + playerColumnCheck);
+            //console.log("number check width: " + playerColumnCheck);
         let playerColumnCheckLeft = this.shipColumnCheckLeft(this.column, this.row, i, grid);
-            console.log("left check", playerColumnCheckLeft);
+            //console.log("left check", playerColumnCheckLeft);
         let playerColumnCheckRight = this.shipColumnCheckRight(this.column, this.row, i, grid);
-            console.log("right check", playerColumnCheckRight);
+            //console.log("right check", playerColumnCheckRight);
         //check if the row chosen is close to the boundary
         let playerRowCheck = this.shipBoundaryLength(this.row, i);
-            console.log("number check length: " + playerRowCheck);
+            //console.log("number check length: " + playerRowCheck);
         let playerRowCheckUp = this.shipRowCheckUp(this.column, this.row, i, grid);
-            console.log("up check", playerRowCheckUp);
+            //console.log("up check", playerRowCheckUp);
         let playerRowCheckDown = this.shipRowCheckDown(this.column, this.row, i, grid);
-            console.log("down check", playerRowCheckDown);
+            //console.log("down check", playerRowCheckDown);
         //filter the player's choice
         //user to decide the orientation of the ship
         let filteredChoice = this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
-            console.log("filteredChoice", filteredChoice);
+            //console.log("filteredChoice", filteredChoice);
         //orientation needs to be checked.
         let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp, playerRowCheckDown, playerColumnCheckLeft, playerColumnCheckRight);
             console.log("Pass the orientation check.", finalOrientChoice); 
@@ -274,15 +274,16 @@ class Player {
         if (hit === true){
             for (let i = 0; i < this.playerShips.length; i++){
                 for (let j = 0; j < this.playerShips[i].spot.length; j++){
-                    console.log(this.playerShips[i].spot.length);
+                    //console.log(this.playerShips[i].spot.length);
                     if (this.playerShips[i].spot[j].row === row && this.playerShips[i].spot[j].column === column){
                         this.playerShips[i].spot[j].hitStatus = true;
                         this.playerShips[i].shipHealth++;
-                        console.log(this.playerShips[i]);
+                        //console.log(this.playerShips[i]);
                         console.log("Current ship that got hit is the",this.playerShips[i].name);
                         console.log("You hit spot #",j+1,"of the ship");
                         if (this.playerShips[i].shipHealth === this.playerShips[i].spot.length){
                             console.log("You sunk the",this.playerShips[i].name);
+                            this.playerShips[i].sunk = true;
                         }
                         return;
                     }else {
@@ -304,8 +305,8 @@ class Player {
                     playerGrid = this.setShip(row - 1, column, playerGrid);
                     row --;
                     this.playerShips[shipIndex].spot.push({"row": row, "column": column, "hitStatus":false});
-                    console.log(this.playerShips[shipIndex].name);
-                    console.log(this.playerShips[shipIndex].spot);
+                    //console.log(this.playerShips[shipIndex].name);
+                    //console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
             //down
@@ -314,8 +315,8 @@ class Player {
                     playerGrid = this.setShip(row + 1, column, playerGrid);
                     row ++;
                     this.playerShips[shipIndex].spot.push({"row": row, "column": column, "hitStatus":false});
-                    console.log(this.playerShips[shipIndex].name);
-                    console.log(this.playerShips[shipIndex].spot);
+                    //console.log(this.playerShips[shipIndex].name);
+                    //onsole.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
             //left
@@ -324,8 +325,8 @@ class Player {
                     playerGrid = this.setShip(row, column - 1, playerGrid);
                     column --;
                     this.playerShips[shipIndex].spot.push({"row": row, "column": column, "hitStatus":false});
-                    console.log(this.playerShips[shipIndex].name);
-                    console.log(this.playerShips[shipIndex].spot);
+                    //console.log(this.playerShips[shipIndex].name);
+                    //console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
             //right
@@ -334,8 +335,8 @@ class Player {
                     playerGrid = this.setShip(row, column + 1, playerGrid);
                     column ++;
                     this.playerShips[shipIndex].spot.push({"row": row, "column": column, "hitStatus":false});
-                    console.log(this.playerShips[shipIndex].name);
-                    console.log(this.playerShips[shipIndex].spot);
+                    //console.log(this.playerShips[shipIndex].name);
+                    //console.log(this.playerShips[shipIndex].spot);
                 }
                 return playerGrid;
         }
@@ -360,9 +361,9 @@ class Player {
         }
         else if (hit === false){
             if (playerColumn >= 1 && playerColumn <= 10){
-                playerGrid[playerRow][playerColumn] = "  M  ";
+                playerGrid[playerRow][playerColumn] = "  O  ";
             }else {
-                playerGrid[playerRow][playerColumn] = "   M  ";
+                playerGrid[playerRow][playerColumn] = "   O  ";
             }
         }
         return playerGrid;
@@ -380,11 +381,11 @@ class Player {
     }
 
     shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck, downCheck, leftCheck, rightCheck){
-        console.log(playerColumnCheck, playerRowCheck);
+        //console.log(playerColumnCheck, playerRowCheck);
         let orientChoice = prompt();
         console.log("Starting orientation check!");
         orientChoice = this.orientValidation(orientChoice);
-        console.log(orientChoice);
+        //console.log(orientChoice);
         switch(orientChoice){
             case '1': 
                 if(playerRowCheck == 1){
@@ -430,14 +431,14 @@ class Player {
     } 
 
     checkSpot(row, column, grid){
-        console.log(row);
-        console.log(column);
+        //console.log(row);
+        //console.log(column);
         if (row === 21 || column === 21){
             console.log("Hitting the boundary.");
             return false;
         }
         let spot = grid[row][column];
-        console.log('Check spot', spot);
+        //console.log('Check spot', spot);
         if (grid[row][column] === "  -  " || grid[row][column] === "   -  "){
             return true;
         }
@@ -447,10 +448,10 @@ class Player {
     }
 
     checkForShip(row, column, grid){
-        console.log(row);
-        console.log(column);
+        //console.log(row);
+        //console.log(column);
         let spot = grid[row][column];
-        console.log('Check spot', spot);
+        //console.log('Check spot', spot);
         if (grid[row][column] === "  X  " || grid[row][column] === "   X  "){
             console.log("HIT!!!");
             return true;
@@ -461,8 +462,8 @@ class Player {
     }
 
     shipColumnCheckLeft(playerColumn, playerRow, i, grid){
-        console.log(this.playerShips[i].size);
-        console.log(playerColumn , playerRow);
+        //console.log(this.playerShips[i].size);
+        //console.log(playerColumn , playerRow);
         let left = true;       
         for (let j = 0; j < this.playerShips[i].size - 1; j++){
             left = this.checkSpot(playerRow, playerColumn - 1, grid);
@@ -475,8 +476,8 @@ class Player {
     }
 
     shipColumnCheckRight(playerColumn, playerRow, i, grid){
-        console.log(this.playerShips[i].size);
-        console.log(playerColumn, playerRow);
+        //console.log(this.playerShips[i].size);
+        //console.log(playerColumn, playerRow);
         let right = true;
         for (let j = 0; j < this.playerShips[i].size - 1; j++){
             right = this.checkSpot(playerRow, playerColumn + 1, grid);
@@ -489,8 +490,8 @@ class Player {
     }
 
     shipRowCheckUp(playerColumn, playerRow, i, grid){
-        console.log(this.playerShips[i].size);
-        console.log(playerColumn, playerRow);
+        //console.log(this.playerShips[i].size);
+        //console.log(playerColumn, playerRow);
         let up = true;
         for (let j = 0; j < this.playerShips[i].size - 1; j++){
             up = this.checkSpot(playerRow - 1, playerColumn, grid);
@@ -503,8 +504,8 @@ class Player {
     }
 
     shipRowCheckDown(playerColumn, playerRow, i, grid){
-        console.log(this.playerShips[i].size);
-        console.log(playerColumn, playerRow);
+        //console.log(this.playerShips[i].size);
+        //console.log(playerColumn, playerRow);
         let down = true;
         for (let j = 0; j < this.playerShips[i].size - 1; j++){
             down = this.checkSpot(playerRow + 1, playerColumn, grid);
@@ -517,11 +518,11 @@ class Player {
     }
 
     shipBoundaryWidth(playerColumn, i){
-        console.log("player column (width)" + playerColumn);
+        //console.log("player column (width)" + playerColumn);
         let rightBound = this.playerBoard.checkRightBoundary(playerColumn, this.playerShips[i].size);
         let leftBound = this.playerBoard.checkLeftBoundary(playerColumn, this.playerShips[i].size);
-        console.log("right Bound: ", rightBound);
-        console.log("left bound: ", leftBound);
+        //console.log("right Bound: ", rightBound);
+        //console.log("left bound: ", leftBound);
         if(rightBound === true && leftBound === true){
             console.log("No bounds on width.");
             return 0;
@@ -537,11 +538,11 @@ class Player {
     }
 
     shipBoundaryLength(playerRow, i){
-        console.log("player row (length)" + playerRow);
+        //console.log("player row (length)" + playerRow);
         let topBound = this.playerBoard.checkTopBoundary(playerRow, this.playerShips[i].size);
         let bottomBound = this.playerBoard.checkBottomBoundary(playerRow, this.playerShips[i].size);
-        console.log("top bound: ", topBound);
-        console.log("bottom bound: ", bottomBound);
+        //console.log("top bound: ", topBound);
+        //console.log("bottom bound: ", bottomBound);
         if(topBound === true && bottomBound === true){
             console.log("No bounds on length.");
             return 0;
