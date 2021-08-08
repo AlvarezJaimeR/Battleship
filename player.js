@@ -284,6 +284,7 @@ class Player {
                         if (this.playerShips[i].shipHealth === this.playerShips[i].spot.length){
                             console.log("You sunk the",this.playerShips[i].name);
                             this.playerShips[i].sunk = true;
+                            this.score ++;
                         }
                         return;
                     }else {

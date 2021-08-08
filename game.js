@@ -16,7 +16,7 @@ class Game{
         console.log(this.playerOne);
         console.log("Enemy Grid");
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
-        for (let i = 0; 5; i++){
+        while (this.playerOne.score < 4){
             this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerOne.playerGrid);
             this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
             console.log(this.playerOne);
