@@ -16,7 +16,7 @@ class Game{
         console.log(this.playerOne);
         console.log("Enemy Grid");
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
-        while (this.playerOne.score < 4){
+        while (this.playerOne.score < this.playerOne.playerShips.length){
             this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerOne.playerGrid);
             this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
             console.log(this.playerOne);
@@ -26,6 +26,11 @@ class Game{
         this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
         console.log("This is the enemy grid! (Player Two's Grid)");
         this.playerOne.enemyBoard.enemyGrid(playerTwoGrid); */
+        if (this.playerOne.score == this.playerOne.playerShips.length){
+            console.log(this.playerOne.name + " has won the game!");
+        }else {
+            console.log(this.playerOne.name + " has lost the game... Better luck next time!");
+        }
     }
 
     displayRules(){
