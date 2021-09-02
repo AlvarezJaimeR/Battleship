@@ -18,7 +18,9 @@ class Game{
         this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
-        while (this.playerOne.score < this.playerOne.playerShips.length){
+        this.playerOne.enemyName(this.playerTwo.name);
+        this.playerTwo.enemyName(this.playerOne.name);
+        while (this.playerOne.score < this.playerTwo.playerShips.length){
             this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
             this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
             console.log(this.playerOne);

@@ -29,6 +29,10 @@ class Player {
         return playerGrid;
     }
 
+    enemyName(name){
+        this.enemyBoard.name = name;
+    }
+
     playerAttack(enemyGrid, playerGrid){
         //user decides the row and column for the ship location
             console.log(this.name + " -- Please decide where to attack! (ex. row G column 10).");
