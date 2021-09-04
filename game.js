@@ -6,24 +6,33 @@ class Game{
     constructor(){
         this.playerOne = new Player();
         this.playerTwo = new Player();
+        this.roll = 0;
     }
 
     runGame(){
         this.displayRules();
+        //player one setup
         this.playerOne.runSetup();
         console.log("Finished displaying the first player grid.");
         this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
         console.log(this.playerOne);
-        console.log("Enemy Grid");
+        //player 2 setup
         this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");
+        this.playerTwo.playerBoard.displayGrid(this.playerTwo.playerGrid);
+        //display enemy grids
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+        this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
+        //set the enemy board names
         this.playerOne.enemyName(this.playerTwo.name);
         this.playerTwo.enemyName(this.playerOne.name);
-        while (this.playerOne.score < this.playerTwo.playerShips.length){
-            this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
-            this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
-            console.log(this.playerOne);
+        //roll the dice to see what player will attack first
+
+        while (this.playerOne.score < this.playerTwo.playerShips.length || 
+                this.playerTwo.score < this.playerOne.playerShips.length){
+                    this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
+                    this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+                    //console.log(this.playerOne);
         }
 /*         let playerTwoGrid = this.playerTwo.runSetup();
         console.log("Finished displaying the second player grid.");
