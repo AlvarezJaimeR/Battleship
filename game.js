@@ -32,6 +32,8 @@ class Game{
                 this.playerTwo.score < this.playerOne.playerShips.length){
                     this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
                     this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+                    this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
+                    this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
                     //console.log(this.playerOne);
         }
 /*         let playerTwoGrid = this.playerTwo.runSetup();
