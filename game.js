@@ -27,7 +27,13 @@ class Game{
         this.playerOne.enemyName(this.playerTwo.name);
         this.playerTwo.enemyName(this.playerOne.name);
         //roll the dice to see what player will attack first
-
+        this.playerOne.dice = this.playerOne.rollDice();
+        console.log(this.playerOne);
+        if (this.playerOne.dice % 2 == 0){
+            console.log("You have rolled an even number. You get to go first!");
+        }else {
+            console.log("You didn't roll an even number... You have to go second!");
+        }
         while (this.playerOne.score < this.playerTwo.playerShips.length || 
                 this.playerTwo.score < this.playerOne.playerShips.length){
                     this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);

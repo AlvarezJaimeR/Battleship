@@ -15,6 +15,7 @@ class Player {
         this.column = '';
         this.playerGrid;
         this.enemyGrid;
+        this.dice = 0;
     }
 
     //main function that runs the initial set up
@@ -27,6 +28,11 @@ class Player {
 /*         console.log("playerGrid from player run setup  =", playerGrid);
         console.log("playerGrid length from player run setup =", playerGrid.length); */
         return playerGrid;
+    }
+
+    rollDice(){
+        let diceNumber = Math.floor(Math.random() * 6) + 1;
+        return diceNumber;
     }
 
     enemyName(name){
