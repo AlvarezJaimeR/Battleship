@@ -31,22 +31,23 @@ class Game{
         console.log(this.playerOne);
         if (this.playerOne.dice % 2 == 0){
             console.log("You have rolled an even number. You get to go first!");
+                while (this.playerOne.score < this.playerTwo.playerShips.length || 
+                        this.playerTwo.score < this.playerOne.playerShips.length){
+                            this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
+                            this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+                            this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
+                            this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
+                }
         }else {
             console.log("You didn't roll an even number... You have to go second!");
+                while (this.playerOne.score < this.playerTwo.playerShips.length || 
+                    this.playerTwo.score < this.playerOne.playerShips.length){
+                        this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
+                        this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
+                        this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
+                        this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+                }
         }
-        while (this.playerOne.score < this.playerTwo.playerShips.length || 
-                this.playerTwo.score < this.playerOne.playerShips.length){
-                    this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
-                    this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
-                    this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
-                    this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
-                    //console.log(this.playerOne);
-        }
-/*         let playerTwoGrid = this.playerTwo.runSetup();
-        console.log("Finished displaying the second player grid.");
-        this.playerTwo.playerBoard.displayGrid(playerTwoGrid);
-        console.log("This is the enemy grid! (Player Two's Grid)");
-        this.playerOne.enemyBoard.enemyGrid(playerTwoGrid); */
         if (this.playerOne.score == this.playerOne.playerShips.length){
             console.log(this.playerOne.name + " has won the game!");
         }else {
