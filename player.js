@@ -46,10 +46,10 @@ class Player {
         //check if the column / row is already occupied 
         let secondCheckSpot = this.checkSpot(this.row, this.column, enemyGrid);
         let loopChoice = this.loopSpot(secondCheckSpot, enemyGrid);
-            console.log('able to attack here', loopChoice);
-            console.log(this.row, this.column);
+            //console.log('able to attack here', loopChoice);
+            //console.log(this.row, this.column);
         let hit = this.checkForShip(this.row, this.column, playerGrid);
-            console.log("Hit", hit);
+            //console.log("Hit", hit);
         this.enemyGrid = this.setAttack(this.row, this.column, enemyGrid, hit);
         this.shipHealth(this.row, this.column, hit);
         //console.log(grid);
@@ -198,12 +198,12 @@ class Player {
             //console.log("filteredChoice", filteredChoice);
         //orientation needs to be checked.
         let finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp, playerRowCheckDown, playerColumnCheckLeft, playerColumnCheckRight);
-            console.log("Pass the orientation check.", finalOrientChoice); 
+            //console.log("Pass the orientation check.", finalOrientChoice); 
             while (finalOrientChoice === undefined){
                 this.filterPlayerChoiceBoundary(playerColumnCheck, playerRowCheck);
                 finalOrientChoice = this.shipChoiceOrientation(playerColumnCheck, playerRowCheck, playerRowCheckUp, playerRowCheckDown, playerColumnCheckLeft, playerColumnCheckRight);
             }
-            console.log("Final pass orient check.", finalOrientChoice);
+            //console.log("Final pass orient check.", finalOrientChoice);
         return finalOrientChoice;
     }
 
@@ -246,7 +246,7 @@ class Player {
             filteredChoice = 8
             return filteredChoice;
         }
-        console.log('filteredPlayerChoice', filteredChoice);
+        //console.log('filteredPlayerChoice', filteredChoice);
         return filteredChoice;
     }
 
@@ -259,7 +259,7 @@ class Player {
             //check if the column / row is already occupied 
             let firstCheck = this.checkSpot(this.row, this.column, playerGrid);
             let loopChoice = this.loopSpot(firstCheck, playerGrid);
-                console.log('able to drop ship', loopChoice);
+                //console.log('able to drop ship', loopChoice);
             //place the ship on the grid for a visual to the user
             playerGrid = this.setShip(this.row, this.column, playerGrid);
             this.playerBoard.displayGrid(playerGrid);
@@ -267,20 +267,20 @@ class Player {
             let userOrientChoice = this.checkBoundary(i, playerGrid);
             //continue to fill in the spots for the ship depending on the size
                 this.playerShips[i].spot.push({"row": this.row, "column": this.column, "hitStatus":false});
-                console.log("current ship location", this.playerShips[i].spot);
-                console.log(this.playerShips[i].spot[0].hitStatus);
+                //console.log("current ship location", this.playerShips[i].spot);
+                //console.log(this.playerShips[i].spot[0].hitStatus);
             this.playerBoard.displayGrid(playerGrid);
             playerGrid = this.shipFill(this.row, this.column, userOrientChoice, this.playerShips[i].size, playerGrid, i);
-                console.log("Check player grid after adding the length of the ship.");
-                console.log(this.playerShips[i].spot);
-                console.log("Ship information",this.playerShips[i]);
+                //console.log("Check player grid after adding the length of the ship.");
+                //console.log(this.playerShips[i].spot);
+                //console.log("Ship information",this.playerShips[i]);
             this.playerBoard.displayGrid(playerGrid);
         }
         return playerGrid;
     }
 
     shipHealth(row, column, hit){
-        console.log("Checking ship health");
+        //console.log("Checking ship health");
         if (hit === true){
             for (let i = 0; i < this.playerShips.length; i++){
                 for (let j = 0; j < this.playerShips[i].spot.length; j++){
@@ -298,7 +298,7 @@ class Player {
                         }
                         return;
                     }else {
-                        console.log("Skipping ship ", this.playerShips[i].name);
+                        //console.log("Skipping ship ", this.playerShips[i].name);
                     }
                 }
             }
@@ -381,7 +381,7 @@ class Player {
     }
 
     orientValidation(orientChoice){
-        console.log("Starting orientation validation!", orientChoice);
+        //console.log("Starting orientation validation!", orientChoice);
         if (orientChoice >= 1 && orientChoice <= 4){
             return orientChoice;
         }else {
@@ -394,7 +394,7 @@ class Player {
     shipChoiceOrientation(playerColumnCheck, playerRowCheck, upCheck, downCheck, leftCheck, rightCheck){
         //console.log(playerColumnCheck, playerRowCheck);
         let orientChoice = prompt();
-        console.log("Starting orientation check!");
+        //console.log("Starting orientation check!");
         orientChoice = this.orientValidation(orientChoice);
         //console.log(orientChoice);
         switch(orientChoice){
@@ -406,7 +406,7 @@ class Player {
                     console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
                     break;
                 }
-                console.log("up", orientChoice);
+                //console.log("up", orientChoice);
                 return orientChoice;
             case '2':
                 if(playerRowCheck == -1){
@@ -416,7 +416,7 @@ class Player {
                     console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
                     break;
                 }
-                console.log("down", orientChoice);
+                //console.log("down", orientChoice);
                 return orientChoice;
             case '3':
                 if(playerColumnCheck == -1){
@@ -426,7 +426,7 @@ class Player {
                     console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
                     break;
                 }
-                console.log("left", orientChoice);
+                //console.log("left", orientChoice);
                 return orientChoice;
             case '4':
                 if(playerColumnCheck == 1){
@@ -436,7 +436,7 @@ class Player {
                     console.log("There are ships already placed in the way. Unable to place the piece with this orientation.");
                     break;
                 }
-                console.log("right", orientChoice);
+                //console.log("right", orientChoice);
                 return orientChoice;
         }
     } 
@@ -535,7 +535,7 @@ class Player {
         //console.log("right Bound: ", rightBound);
         //console.log("left bound: ", leftBound);
         if(rightBound === true && leftBound === true){
-            console.log("No bounds on width.");
+            //console.log("No bounds on width.");
             return 0;
         }else if(rightBound === true && leftBound === false) {
             console.log("Not able to place the ship orientation to the left.");
@@ -555,7 +555,7 @@ class Player {
         //console.log("top bound: ", topBound);
         //console.log("bottom bound: ", bottomBound);
         if(topBound === true && bottomBound === true){
-            console.log("No bounds on length.");
+            //console.log("No bounds on length.");
             return 0;
         }else if(topBound === true && bottomBound === false) {
             console.log("Not able to place the ship orientation down.");

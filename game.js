@@ -13,12 +13,12 @@ class Game{
         this.displayRules();
         //player one setup
         this.playerOne.runSetup();
-        console.log("Finished displaying the first player grid.");
+        //console.log("Finished displaying the first player grid.");
         this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
-        console.log(this.playerOne);
+        //console.log(this.playerOne);
         //player 2 setup
         this.playerTwo.runSetup();
-        console.log("Finished displaying the second player grid.");
+        //console.log("Finished displaying the second player grid.");
         this.playerTwo.playerBoard.displayGrid(this.playerTwo.playerGrid);
         //display enemy grids
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
@@ -27,10 +27,11 @@ class Game{
         this.playerOne.enemyName(this.playerTwo.name);
         this.playerTwo.enemyName(this.playerOne.name);
         //roll the dice to see what player will attack first
+        console.log("Player one rolls the dice. You need to roll an even number to attack first!");
         this.playerOne.dice = this.playerOne.rollDice();
-        console.log(this.playerOne);
+        //console.log(this.playerTwo);
         if (this.playerOne.dice % 2 == 0){
-            console.log("You have rolled an even number. You get to go first!");
+            console.log(this.playerOne.name + "has rolled an even number. You get to go first!");
                 while (this.playerOne.score < this.playerTwo.playerShips.length || 
                         this.playerTwo.score < this.playerOne.playerShips.length){
                             this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
@@ -39,7 +40,7 @@ class Game{
                             this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
                 }
         }else {
-            console.log("You didn't roll an even number... You have to go second!");
+            console.log(this.playerOne.name + "didn't roll an even number... You have to go second!");
                 while (this.playerOne.score < this.playerTwo.playerShips.length || 
                     this.playerTwo.score < this.playerOne.playerShips.length){
                         this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
@@ -50,7 +51,9 @@ class Game{
         }
         if (this.playerOne.score == this.playerOne.playerShips.length){
             console.log(this.playerOne.name + " has won the game!");
+            console.log(this.playerTwo.name + " has lost the game... Better luck next time!");
         }else {
+            console.log(this.playerTwo.name + " has won the game!");
             console.log(this.playerOne.name + " has lost the game... Better luck next time!");
         }
     }

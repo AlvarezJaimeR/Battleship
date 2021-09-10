@@ -66,29 +66,29 @@ class Gameboard {
     }
 
     checkRightBoundary(pickedColumn, shipSize){
-        console.log("right bound " + pickedColumn + " " + shipSize);
+        //console.log("right bound " + pickedColumn + " " + shipSize);
         if (this.width - 1 - pickedColumn - shipSize + 1 < 0){
             console.log("Too close to the right boundary. The ship can't face this way.");
             return false;
         }else{
-            console.log("Right Boundary pass");
+            //console.log("Right Boundary pass");
             return true;
         }
     }
 
     checkLeftBoundary(pickedColumn, shipSize){
-        console.log("left bound " + pickedColumn + " " + shipSize);
+        //console.log("left bound " + pickedColumn + " " + shipSize);
         if (pickedColumn - shipSize + 1 <= 0){
             console.log("Too close to the left boundary. The ship can't face this way.");
             return false;
         }else{
-            console.log("Left Boundary Pass");
+            //console.log("Left Boundary Pass");
             return true;
         }
     }
 
     checkTopBoundary(pickedRow, shipSize){
-        console.log("top bound " + pickedRow + " " + shipSize);
+        //console.log("top bound " + pickedRow + " " + shipSize);
         if (pickedRow - shipSize + 1 >= 0){
             return true;
         }else{
@@ -98,7 +98,7 @@ class Gameboard {
     }
 
     checkBottomBoundary(pickedRow, shipSize){
-        console.log("top bound " + pickedRow + " " + shipSize);
+        //console.log("top bound " + pickedRow + " " + shipSize);
         if (this.length - 1 - pickedRow - shipSize + 1 >= 0){
             return true;
         }else{
