@@ -34,18 +34,30 @@ class Game{
             console.log(this.playerOne.name + "has rolled an even number. You get to go first!");
                 while (this.playerOne.score < this.playerTwo.playerShips.length || 
                         this.playerTwo.score < this.playerOne.playerShips.length){
+                            console.log("This is your personal grid.");
+                            this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
                             this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
+                            console.log("This is the enemy grid.");
                             this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
+                            console.log("This is your personal grid.");
+                            this.playerTwo.playerBoard.displayGrid(this.playerTwo.playerGrid);
                             this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
+                            console.log("This is the enemy grid.");
                             this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
                 }
         }else {
             console.log(this.playerOne.name + "didn't roll an even number... You have to go second!");
                 while (this.playerOne.score < this.playerTwo.playerShips.length || 
                     this.playerTwo.score < this.playerOne.playerShips.length){
+                        console.log("This is your personal grid.");
+                        this.playerTwo.playerBoard.displayGrid(this.playerTwo.playerGrid);
                         this.playerTwo.playerAttack(this.playerTwo.enemyGrid, this.playerOne.playerGrid);
+                        console.log("This is the enemy grid.");
                         this.playerTwo.enemyBoard.displayGrid(this.playerTwo.enemyGrid);
+                        console.log("This is your personal grid.");
+                        this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
                         this.playerOne.playerAttack(this.playerOne.enemyGrid, this.playerTwo.playerGrid);
+                        console.log("This is the enemy grid.");
                         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);
                 }
         }
