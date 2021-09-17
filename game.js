@@ -14,11 +14,13 @@ class Game{
         //player one setup
         this.playerOne.runSetup();
         //console.log("Finished displaying the first player grid.");
+        console.log("This is the final grid for " + this.playerOne.name);
         this.playerOne.playerBoard.displayGrid(this.playerOne.playerGrid);
         //console.log(this.playerOne);
         //player 2 setup
         this.playerTwo.runSetup();
         //console.log("Finished displaying the second player grid.");
+        console.log("This is the final grid for " + this.playerOne.name);
         this.playerTwo.playerBoard.displayGrid(this.playerTwo.playerGrid);
         //display enemy grids
         this.playerOne.enemyBoard.displayGrid(this.playerOne.enemyGrid);

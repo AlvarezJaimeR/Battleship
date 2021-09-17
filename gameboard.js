@@ -35,7 +35,7 @@ class Gameboard {
 
         let alphabetArray = ['  A  ', '  B  ', '  C  ', '  D  ', '  E  ', '  F  ', '  G  ', '  H  ', '  I  ', '  J  ', '  K  ', '  L  ', '  M  ', '  N  ', '  O  ', '  P  ', '  Q  ', '  R  ', '  S  ', '  T  '];
         let gameGrid = createGrid(this.width, this.length, alphabetArray);
-        this.displayGrid(gameGrid);
+        //this.displayGrid(gameGrid);
         return gameGrid;
     }
 
